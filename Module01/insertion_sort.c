@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// To read to array content form user
 void read(int a[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -9,12 +10,15 @@ void read(int a[], int size)
     }
 }
 
+// To display the content of the Array
 void show(int a[], int size)
 {
     for (int i = 0; i < size; i++)
         printf("%d ", a[i]);
+    printf("\n");
 }
 
+// Insertion Sort code
 void insertion_sort(int a[], int s)
 {
     for (int i = 1; i < s; i++)
@@ -30,6 +34,7 @@ void insertion_sort(int a[], int s)
     }
 }
 
+// Driver
 int main()
 {
     int size;
@@ -37,10 +42,10 @@ int main()
     scanf("%d", &size);
     int array[size];
     read(array, size);
-    printf("ARRAY BEFORE SORT: \n");
+    printf("ARRAY BEFORE SORT:\n");
     show(array, size);
     insertion_sort(array, size);
-    printf("\nARRAY AFTER SORT: \n");
+    printf("ARRAY AFTER SORT:\n");
     show(array, size);
     return 0;
 }

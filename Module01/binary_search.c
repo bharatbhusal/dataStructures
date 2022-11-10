@@ -1,4 +1,6 @@
 #include <stdio.h>
+
+// To read to array content form user
 void read(int a[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -7,6 +9,8 @@ void read(int a[], int size)
         scanf("%d", &a[i]);
     }
 }
+
+// Binary Search code
 int binary_search(int a[], int l, int r, int t)
 {
     int m = l + (r - l) / 2;
@@ -17,6 +21,8 @@ int binary_search(int a[], int l, int r, int t)
     else
         return binary_search(a, m + 1, r, t);
 }
+
+// Driver
 int main()
 {
     int size, target;

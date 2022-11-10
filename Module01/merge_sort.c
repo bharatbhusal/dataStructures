@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// To read to array content form user
 void read(int a[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -9,12 +10,15 @@ void read(int a[], int size)
     }
 }
 
+// To display the content of the Array
 void show(int a[], int size)
 {
     for (int i = 0; i < size; i++)
         printf("%d ", a[i]);
+    printf("\n");
 }
 
+// Merge Function
 void merge(int a[], int l, int m, int r)
 {
     int i = 0, j = 0, k = l, n1, n2;
@@ -54,6 +58,7 @@ void merge(int a[], int l, int m, int r)
     }
 }
 
+// Merge Sort Function
 void merge_sort(int a[], int l, int r)
 {
     if (l < r)
@@ -65,6 +70,7 @@ void merge_sort(int a[], int l, int r)
     }
 }
 
+// Driver
 int main()
 {
     int size;
@@ -75,7 +81,7 @@ int main()
     printf("ARRAY BEFORE SORT: \n");
     show(array, size);
     merge_sort(array, 0, size - 1);
-    printf("\nARRAY AFTER SORT: \n");
+    printf("ARRAY AFTER SORT: \n");
     show(array, size);
     return 0;
 }

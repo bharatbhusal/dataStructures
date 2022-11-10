@@ -1,4 +1,6 @@
 #include <stdio.h>
+
+// To read to array content form user
 void read(int a[], int size)
 {
     for (int i = 0; i < size; i++)
@@ -7,6 +9,8 @@ void read(int a[], int size)
         scanf("%d", &a[i]);
     }
 }
+
+// Linear Search Code
 int linear_search(int a[], int s, int t)
 {
     for (int i = 0; i < s; i++)
@@ -14,17 +18,18 @@ int linear_search(int a[], int s, int t)
             return i;
     return -1;
 }
+
+// Driver
 int main()
 {
-    int size;
+    int size, target, index;
     printf("Enter the size of the array: ");
     scanf("%d", &size);
     int array[size];
     read(array, size);
-    int target;
     printf("Enter the target element: ");
     scanf("%d", &target);
-    int index = linear_search(array, size, target);
+    index = linear_search(array, size, target);
     if (index == -1)
         printf("%d is not present in the given array.\n", target);
     else
