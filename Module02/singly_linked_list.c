@@ -220,10 +220,10 @@ int main()
     addBet(&head);
     // displaying the values of the linked list
     display(&head);
+    // displaying the values of linked list in reverse order.
     display_rev(&head);
     // searching for element in the list.
     search(&head);
-    // displaying the values of linked list in reverse order.
     // deleting the nodes in different positions as defined in the respective function above.
     delStart(&head);
     display(&head);
