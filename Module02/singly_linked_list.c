@@ -20,6 +20,54 @@ void display(struct node **head)
     printf("%d\n", temp->data);
 }
 
+// displaying the nodes in reverse order
+void display_rev(struct node **head)
+{
+    struct node *temp = *head;
+    struct node *sup = NULL;
+    while (temp != sup && temp != NULL)
+    {
+        struct node *temp1 = *head;
+        while (temp1->next != NULL && temp1->next != sup)
+        {
+            temp1 = temp1->next;
+        }
+        printf("%d ", temp1->data);
+        sup = temp1;
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// returning node number where "val" is stored
+int position(struct node **head, int val)
+{
+    struct node *temp = *head;
+    int pos = 1;
+
+    while (temp->data != val && temp->next != NULL)
+    {
+        temp = temp->next;
+        pos++;
+    }
+    if (temp->data == val)
+        return pos;
+    else
+        return -1;
+}
+
+// searching for the "val"
+void search(struct node **head, int val)
+{
+    int pos = position(head, val);
+    if (pos == -1)
+        printf("%d is not in the list.\n", val);
+    else
+        printf("%d is in node %d.\n", val, pos);
+}
+
+
+
 // function to return a pointer to a memory address of above data type allocated dynamically
 struct node *createNode(int val)
 {
@@ -110,52 +158,6 @@ void delBet(struct node **head, int place)
         dump->next = NULL;
         free(dump);
     }
-}
-
-// returning node number where "val" is stored
-int position(struct node **head, int val)
-{
-    struct node *temp = *head;
-    int pos = 1;
-
-    while (temp->data != val && temp->next != NULL)
-    {
-        temp = temp->next;
-        pos++;
-    }
-    if (temp->data == val)
-        return pos;
-    else
-        return -1;
-}
-
-// searching for the "val"
-void search(struct node **head, int val)
-{
-    int pos = position(head, val);
-    if (pos == -1)
-        printf("%d is not in the list.\n", val);
-    else
-        printf("%d is in node %d.\n", val, pos);
-}
-
-// displaying the nodes in reverse order
-void display_rev(struct node **head)
-{
-    struct node *temp = *head;
-    struct node *sup = NULL;
-    while (temp != sup && temp != NULL)
-    {
-        struct node *temp1 = *head;
-        while (temp1->next != NULL && temp1->next != sup)
-        {
-            temp1 = temp1->next;
-        }
-        printf("%d ", temp1->data);
-        sup = temp1;
-        temp = temp->next;
-    }
-    printf("\n");
 }
 
 // driving function
