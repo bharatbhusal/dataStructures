@@ -21,6 +21,19 @@ void display(Node **head)
     printf("%d\n", temp->data);
 }
 
+// Function to count the number of nodes in the list
+int countNode(Node **head)
+{
+    int count = 0;
+    Node *temp = *head;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
 // returning node number where "val" is stored
 int position(struct node **head, int val)
 {
@@ -50,19 +63,6 @@ void search(struct node **head)
         printf("%d is not in the list.\n", val);
     else
         printf("%d is in node %d.\n", val, pos);
-}
-
-// Function to count the number of nodes in the list
-int countNode(Node **head)
-{
-    int count = 0;
-    Node *temp = *head;
-    while (temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-    return count;
 }
 
 // displaying the nodes in reverse order
