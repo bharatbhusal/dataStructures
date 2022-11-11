@@ -21,63 +21,6 @@ void display(Node **head)
     printf("%d\n", temp->data);
 }
 
-int countNode(Node **head)
-{
-    int count = 0;
-    Node *temp = *head;
-    while (temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-    return count;
-}
-
-// displaying the nodes in reverse order
-void display_rev(Node **head)
-{
-    printf("Content of linked list in reverse order\n");
-    Node *temp = *head;
-    int size = countNode(head);
-    int array[size];
-    for (int i = 0; temp != NULL; temp = temp->next, i++)
-        array[i] = temp->data;
-
-    for (int i = size - 1; i >= 0; i--)
-        printf("%d ", array[i]);
-    printf("\n");
-}
-
-// returning node number where "val" is stored
-int position(Node **head, int val)
-{
-    Node *temp = *head;
-    int pos = 1;
-
-    while (temp->data != val && temp->next != NULL)
-    {
-        temp = temp->next;
-        pos++;
-    }
-    if (temp->data == val)
-        return pos;
-    else
-        return -1;
-}
-
-// searching for the "val"
-void search(Node **head)
-{
-    int val;
-    printf("Search element: ");
-    scanf("%d", &val);
-    int pos = position(head, val);
-    if (pos == -1)
-        printf("%d is not in the list.\n", val);
-    else
-        printf("%d is in node %d.\n", val, pos);
-}
-
 // function to return a pointer to a memory address of above data type allocated dynamically
 Node *createNode()
 {
@@ -195,16 +138,57 @@ void delBet(Node **head)
         Node *dump = NULL;
         while (runner->next != NULL && runner->next->data != place)
             runner = runner->next;
-        if (runner->next != NULL && runner->next->data == place)
-        {
-            dump = runner->next;
-            runner->next = runner->next->next;
-            dump->next = NULL;
-            free(dump);
-        }
-        else
-            printf("%d does not exist in the list.\n", place);
+        dump = runner->next;
+        runner->next = runner->next->next;
+        dump->next = NULL;
+        free(dump);
     }
+}
+
+// returning node number where "val" is stored
+int position(struct node **head, int val)
+{
+    struct node *temp = *head;
+    int pos = 1;
+
+    while (temp->data != val && temp->next != NULL)
+    {
+        temp = temp->next;
+        pos++;
+    }
+    if (temp->data == val)
+        return pos;
+    else
+        return -1;
+}
+
+// searching for the "val"
+void search(struct node **head, int val)
+{
+    int pos = position(head, val);
+    if (pos == -1)
+        printf("%d is not in the list.\n", val);
+    else
+        printf("%d is in node %d.\n", val, pos);
+}
+
+// displaying the nodes in reverse order
+void display_rev(struct node **head)
+{
+    struct node *temp = *head;
+    struct node *sup = NULL;
+    while (temp != sup && temp != NULL)
+    {
+        struct node *temp1 = *head;
+        while (temp1->next != NULL && temp1->next != sup)
+        {
+            temp1 = temp1->next;
+        }
+        printf("%d ", temp1->data);
+        sup = temp1;
+        temp = temp->next;
+    }
+    printf("\n");
 }
 
 // driving function
