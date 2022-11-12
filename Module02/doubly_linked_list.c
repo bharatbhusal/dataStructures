@@ -65,25 +65,23 @@ void search(struct node **head)
     else
         printf("%d is in node %d.\n", val, pos);
 }
-Node *secLastNode(Node **head)
+Node *lastNode(Node **head)
 {
     Node *temp = *head;
-    if (countNode(head) == 0)
-    {
-        printf("The list is empty.\n");
+    if (countNode(head) == 0 || countNode(head) == 1)
         return temp;
-    }
     else
     {
         while (temp->next != NULL)
             temp = temp->next;
-        return temp->prev;
+        return temp;
     }
 }
 // displaying the nodes in reverse order
 void display_rev(Node **head)
 {
-    Node *temp = secLastNode(head)->next;
+    printf("Content of linked list in reverse order\n");
+    Node *temp = lastNode(head);
     while (temp != NULL)
     {
         printf("%d ", temp->data);
@@ -105,6 +103,7 @@ Node *createNode(int val)
 // function to add a node in the begining of the doubly linked list.
 void addStart(Node **head, int val)
 {
+    printf("Adding node(%d) in the begining of the list.\n", val);
     Node *temp = createNode(val);
     if (countNode(head) == 0)
         *head = temp;
@@ -118,26 +117,39 @@ void addStart(Node **head, int val)
 // function to add a node at the end of the doubly linked list
 void addEnd(Node **head, int val)
 {
-    Node *temp = createNode(head);
-    Node *last = secLastNode(head);
-    last = temp;
+    printf("Adding node(%d) at the end of the list.\n", val);
+    Node *temp = createNode(val);
+    if (countNode(head) == 0)
+        *head = temp;
+    else
+    {
+        Node *last = lastNode(head);
+        temp->prev = last;
+        last->next = temp;
+    }
 }
 
 // function to add a node before the node having value "place".
 void addBet(Node **head, int val, int place)
 {
+    printf("Adding node(%d) before %d the list.\n", val, place);
     if ((*head)->data == place)
         addStart(head, val);
     else
     {
         Node *runner = *head;
-        while (runner->next->data != place)
+        while (runner->next->data != place && runner->next->next != NULL)
             runner = runner->next;
-        Node *temp = createNode(val);
-        temp->next = runner->next;
-        runner->next = temp;
-        temp->prev = runner;
-        temp->next->prev = temp;
+        if (runner->next->data == place && runner->next != NULL)
+        {
+            Node *temp = createNode(val);
+            temp->next = runner->next;
+            runner->next = temp;
+            temp->prev = runner;
+            temp->next->prev = temp;
+        }
+        else
+            printf("%d does not exist in the list.\n", place);
     }
 }
 
@@ -192,10 +204,12 @@ int main()
 
     // adding nodes in differenet places with respect to the functions defined above.
     addEnd(&head, 16);
-    addEnd(&head, 110);
     addStart(&head, 89);
+    addEnd(&head, 110);
+    addEnd(&head, 11);
     addStart(&head, 8);
-    addBet(&head, 45, 89);
+    display(&head);
+    addBet(&head, 45, 8);
     // displaying the values stored in each node.
     display(&head);
     display_rev(&head);
