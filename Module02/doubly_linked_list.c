@@ -58,11 +58,11 @@ int position(struct node **head, int val)
 }
 
 // searching for the "val"
-void search(struct node **head, int val)
+void search(struct node **head)
 {
-    // int val;
-    // printf("Search element: ");
-    // scanf("%d", &val);
+    int val;
+    printf("Search element: ");
+    scanf("%d", &val);
 
     int pos = position(head, val);
     if (pos == -1)
@@ -96,8 +96,11 @@ void display_rev(Node **head)
 }
 
 // function to return a pointer to the memory address of above data type alocated dynamically.
-Node *createNode(int val)
+Node *createNode()
 {
+    int val;
+    printf("Node value: ");
+    scanf("%d", &val);
     Node *temp = (Node *)malloc(sizeof(Node));
     temp->prev = NULL;
     temp->data = val;
@@ -106,10 +109,10 @@ Node *createNode(int val)
 }
 
 // function to add a node in the begining of the doubly linked list.
-void addStart(Node **head, int val)
+void addStart(Node **head)
 {
-    printf("Adding node(%d) in the begining of the list.\n", val);
-    Node *temp = createNode(val);
+    printf("Adding node in the begining of the list.\n");
+    Node *temp = createNode();
     if (countNode(head) == 0)
         *head = temp;
     else
@@ -120,10 +123,10 @@ void addStart(Node **head, int val)
     }
 }
 // function to add a node at the end of the doubly linked list
-void addEnd(Node **head, int val)
+void addEnd(Node **head)
 {
-    printf("Adding node(%d) at the end of the list.\n", val);
-    Node *temp = createNode(val);
+    printf("Adding a node at the end of the list.\n");
+    Node *temp = createNode();
     if (countNode(head) == 0)
         *head = temp;
     else
@@ -135,11 +138,14 @@ void addEnd(Node **head, int val)
 }
 
 // function to add a node before the node having value "place".
-void addBet(Node **head, int val, int place)
+void addBet(Node **head)
 {
-    printf("Adding node(%d) before %d the list.\n", val, place);
+    int place;
+    printf("Adding a node in middle of the list.\n");
+    printf("Node place(value): ");
+    scanf("%d", &place);
     if ((*head)->data == place)
-        addStart(head, val);
+        addStart(head);
     else
     {
         Node *runner = *head;
@@ -147,7 +153,7 @@ void addBet(Node **head, int val, int place)
             runner = runner->next;
         if (runner->next->data == place && runner->next != NULL)
         {
-            Node *temp = createNode(val);
+            Node *temp = createNode();
             temp->next = runner->next;
             runner->next = temp;
             temp->prev = runner;
@@ -207,9 +213,12 @@ void delEnd(Node **head)
 }
 
 // function to delete the node which has the value "place" stored.
-void delBet(Node **head, int place)
+void delBet(Node **head)
 {
-    printf("Deleting a node(%d) of the list.\n", place);
+    int place;
+    printf("Deleting a node from the list.\n");
+    printf("To delete node: ");
+    scanf("%d", &place);
     if ((*head)->data == place)
         delStart(head);
     else
@@ -241,17 +250,17 @@ int main()
     Node *head = NULL;
 
     // adding nodes in differenet places with respect to the functions defined above.
-    addEnd(&head, 16);
-    addEnd(&head, 110);
-    addStart(&head, 8);
-    addStart(&head, 89);
-    addEnd(&head, 11);
+    addEnd(&head);
+    addEnd(&head);
+    addStart(&head);
+    addStart(&head);
+    addEnd(&head);
     display(&head);
-    addBet(&head, 45, 8);
+    addBet(&head);
     // displaying the values stored in each node.
     display(&head);
     // searching for 110 in the list.
-    search(&head, 110);
+    search(&head);
     display(&head);
     // displayng the values stored in each node in reverse order.
     display_rev(&head);
@@ -260,7 +269,7 @@ int main()
     display(&head);
     delEnd(&head);
     display(&head);
-    delBet(&head, 8);
+    delBet(&head);
     display(&head);
     return 0;
 }
