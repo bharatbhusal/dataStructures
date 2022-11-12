@@ -9,19 +9,6 @@ typedef struct node
     struct node *next;
 } Node;
 
-// function to display the data in the doubly linked list,
-void display(Node **head)
-{
-    printf("Content of linked list\n");
-    Node *temp = *head;
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
-    printf("\n");
-}
-
 // Function to count the number of nodes in the list
 int countNode(Node **head)
 {
@@ -33,6 +20,24 @@ int countNode(Node **head)
         temp = temp->next;
     }
     return count;
+}
+
+// function to display the data in the doubly linked list,
+void display(Node **head)
+{
+    printf("Content of linked list\n");
+    if (countNode(head) == 0)
+        printf("List is empty.\n");
+    else
+    {
+        Node *temp = *head;
+        while (temp != NULL)
+        {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
 }
 
 // returning node number where "val" is stored
@@ -53,11 +58,11 @@ int position(struct node **head, int val)
 }
 
 // searching for the "val"
-void search(struct node **head)
+void search(struct node **head, int val)
 {
-    int val;
-    printf("Search element: ");
-    scanf("%d", &val);
+    // int val;
+    // printf("Search element: ");
+    // scanf("%d", &val);
 
     int pos = position(head, val);
     if (pos == -1)
@@ -156,43 +161,76 @@ void addBet(Node **head, int val, int place)
 // function to delete the first node of the doubly linked list.
 void delStart(Node **head)
 {
-    Node *dump = *head;
-    *head = (*head)->next;
-    (*head)->prev = NULL;
-    dump->next = NULL;
-    free(dump);
+    printf("Deleting first node of the list.\n");
+    if (countNode(head) == 0)
+        printf("List is empty.\n");
+    else
+    {
+        if (countNode(head) == 1)
+        {
+            *head = NULL;
+            free(*head);
+        }
+        else
+        {
+            Node *dump = *head;
+            *head = (*head)->next;
+            (*head)->prev = NULL;
+            dump->next = NULL;
+            free(dump);
+        }
+    }
 }
 
 // function to delete the last node of the doubly linked list.
 void delEnd(Node **head)
 {
-    Node *dump = NULL;
-    Node *temp = *head;
-    while (temp->next != NULL)
-        temp = temp->next;
-    dump = temp;
-    temp->prev->next = NULL;
-    dump->prev = NULL;
-    free(dump);
+    printf("Deleting last node of the list.\n");
+    if (countNode(head) == 0)
+        printf("List is empty.\n");
+    else
+    {
+        if (countNode(head) == 1)
+        {
+            *head = NULL;
+            free(*head);
+        }
+        else
+        {
+            Node *dump = lastNode(head);
+            dump->prev->next = NULL;
+            dump->prev = NULL;
+            dump = NULL;
+            free(dump);
+        }
+    }
 }
 
 // function to delete the node which has the value "place" stored.
 void delBet(Node **head, int place)
 {
+    printf("Deleting a node(%d) of the list.\n", place);
     if ((*head)->data == place)
         delStart(head);
     else
     {
         Node *dump = NULL;
         Node *temp = *head;
-        while (temp->data != place)
+        while (temp->data != place && temp->next != NULL)
             temp = temp->next;
-        dump = temp;
-        temp->prev->next = temp->next;
-        temp->prev->next->prev = temp->prev;
-        dump->prev = NULL;
-        dump->next = NULL;
-        free(dump);
+        if (temp->data == place && temp->next != NULL)
+        {
+            dump = temp;
+            temp->prev->next = temp->next;
+            temp->prev->next->prev = temp->prev;
+            dump->prev = NULL;
+            dump->next = NULL;
+            free(dump);
+        }
+        else if (temp->data == place)
+            delEnd(head);
+        else
+            printf("%d is not in the list.\n", place);
     }
 }
 
@@ -204,25 +242,25 @@ int main()
 
     // adding nodes in differenet places with respect to the functions defined above.
     addEnd(&head, 16);
-    addStart(&head, 89);
     addEnd(&head, 110);
-    addEnd(&head, 11);
     addStart(&head, 8);
+    addStart(&head, 89);
+    addEnd(&head, 11);
     display(&head);
     addBet(&head, 45, 8);
     // displaying the values stored in each node.
     display(&head);
-    display_rev(&head);
     // searching for 110 in the list.
-    // search(&head, 110);
+    search(&head, 110);
+    display(&head);
     // displayng the values stored in each node in reverse order.
-    // display_rev(&head);
+    display_rev(&head);
     // deleting the nodes in different positions as defined in the respective function above.
-    // delStart(&head);
-    // display(&head);
-    // delEnd(&head);
-    // display(&head);
-    // delBet(&head, 89);
-    // display(&head);
+    delStart(&head);
+    display(&head);
+    delEnd(&head);
+    display(&head);
+    delBet(&head, 8);
+    display(&head);
     return 0;
 }
