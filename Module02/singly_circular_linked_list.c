@@ -23,6 +23,7 @@ int countNode(Node **head)
     return count + 1;
 }
 
+// function to return address of last node
 Node *lastNode(Node **head)
 {
     Node *runner = *head;
