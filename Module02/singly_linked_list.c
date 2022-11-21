@@ -34,6 +34,24 @@ int countNode(Node **head)
     return count;
 }
 
+// displaying the nodes in reverse order
+void display_rev(struct node **head)
+{
+    printf("Content of Linked list in reverse order:\n");
+    int size = countNode(head);
+    int array[size];
+
+    Node *temp = *head;
+    for (int i = size - 1; i >= 0; i--)
+    {
+        array[i] = temp->data;
+        temp = temp->next;
+    }
+    for (int i = 0; i < size; i++)
+        printf("%d ", array[i]);
+    printf("\n");
+}
+
 // returning node number where "val" is stored
 int position(struct node **head, int val)
 {
@@ -63,20 +81,6 @@ void search(struct node **head)
         printf("%d is not in the list.\n", val);
     else
         printf("%d is in node %d.\n", val, pos);
-}
-
-// displaying the nodes in reverse order
-void display_rev(struct node **head)
-{
-    int size = countNode(head);
-    int array[size];
-
-    Node *temp = *head;
-    for (int i = size - 1; i >= 0; i--)
-    {
-        array[i] = temp->data;
-        temp = temp->next;
-    }
 }
 
 // function to return a pointer to a memory address of above data type allocated dynamically

@@ -56,6 +56,18 @@ int position(struct node **head, int val)
     else
         return -1;
 }
+// displaying the nodes in reverse order
+void display_rev(Node **head)
+{
+    printf("Content of linked list in reverse order\n");
+    Node *temp = lastNode(head);
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("\n");
+}
 
 // searching for the "val"
 void search(struct node **head)
@@ -70,6 +82,7 @@ void search(struct node **head)
     else
         printf("%d is in node %d.\n", val, pos);
 }
+
 Node *lastNode(Node **head)
 {
     Node *temp = *head;
@@ -82,19 +95,6 @@ Node *lastNode(Node **head)
         return temp;
     }
 }
-// displaying the nodes in reverse order
-void display_rev(Node **head)
-{
-    printf("Content of linked list in reverse order\n");
-    Node *temp = lastNode(head);
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->prev;
-    }
-    printf("\n");
-}
-
 // function to return a pointer to the memory address of above data type alocated dynamically.
 Node *createNode()
 {
