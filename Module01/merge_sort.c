@@ -13,6 +13,7 @@ void read(int a[], int size)
 // To display the content of the Array
 void show(int a[], int size)
 {
+    printf("Content of the Array:\n");
     for (int i = 0; i < size; i++)
         printf("%d ", a[i]);
     printf("\n");
@@ -35,14 +36,13 @@ void merge(int a[], int l, int m, int r)
         {
             a[k] = left[i];
             i++;
-            k++;
         }
         else
         {
             a[k] = right[j];
             j++;
-            k++;
         }
+        k++;
     }
     while (i < n1)
     {
@@ -78,10 +78,9 @@ int main()
     scanf("%d", &size);
     int array[size];
     read(array, size);
-    printf("ARRAY BEFORE SORT: \n");
     show(array, size);
+    printf("Sorting Array.\n");
     merge_sort(array, 0, size - 1);
-    printf("ARRAY AFTER SORT: \n");
     show(array, size);
     return 0;
 }

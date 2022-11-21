@@ -13,6 +13,7 @@ void read(int a[], int size)
 // To display the content of the Array
 void show(int a[], int size)
 {
+    printf("Content of the Array.\n");
     for (int i = 0; i < size; i++)
         printf("%d ", a[i]);
     printf("\n");
@@ -60,10 +61,9 @@ int main()
     scanf("%d", &size);
     int array[size];
     read(array, size);
-    printf("ARRAY BEFORE SORT: \n");
     show(array, size);
+    printf("Sorting Array.\n");
     quick_sort(array, 0, size - 1);
-    printf("ARRAY AFTER SORT: \n");
     show(array, size);
     return 0;
 }

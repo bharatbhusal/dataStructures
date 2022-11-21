@@ -31,8 +31,8 @@ int main()
     scanf("%d", &target);
     index = linear_search(array, size, target);
     if (index == -1)
-        printf("%d is not present in the given array.\n", target);
+        printf("%d is not present in the Array.\n", target);
     else
-        printf("%d is found in index %d(position %d) in the given array.\n", target, index, index + 1);
+        printf("%d is found in index %d(position %d) in the Array.\n", target, index, index + 1);
     return 0;
 }

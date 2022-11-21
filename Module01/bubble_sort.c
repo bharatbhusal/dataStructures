@@ -13,6 +13,7 @@ void read(int a[], int size)
 // To display the content of the Array
 void show(int a[], int size)
 {
+    printf("Content of the Array:\n");
     for (int i = 0; i < size; i++)
         printf("%d ", a[i]);
     printf("\n");
@@ -29,6 +30,7 @@ void swap(int *a, int *b)
 // Bubble sort function
 void bubble_sort(int a[], int s)
 {
+    printf("Sorting Array.\n");
     for (int i = 0; i < s; i++)
     {
         int check = 0;
@@ -51,10 +53,8 @@ int main()
     scanf("%d", &size);
     int array[size];
     read(array, size);
-    printf("ARRAY BEFORE SORT:\n");
     show(array, size);
     bubble_sort(array, size);
-    printf("ARRAY AFTER SORT: \n");
     show(array, size);
     return 0;
 }

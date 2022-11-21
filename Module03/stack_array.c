@@ -13,7 +13,7 @@ Stack *createStack(int size)
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->top = -1;
     stack->size = size;
-    stack->array = (int *)calloc(stack->size, sizeof(int));
+    stack->array = (int *)calloc(size, sizeof(int));
     return stack;
 }
 
@@ -29,6 +29,7 @@ int isFull(Stack **stack)
 
 void display(Stack **stack)
 {
+    printf("Content of the Stack:\n");
     int runner = (*stack)->top;
     for (int i = runner; i >= 0; i--)
         printf("%d ", (*stack)->array[i]);
@@ -42,7 +43,7 @@ void push(Stack **stack, int val)
     else
     {
         (*stack)->array[++(*stack)->top] = val;
-        printf("%d is pushed(added on top of the stack)\n", val);
+        printf("Adding an element(%d) in the stack.\n", val);
     }
 }
 
@@ -52,7 +53,7 @@ int pop(Stack **stack)
         printf("The stack is empty.\n");
     else
     {
-        printf("%d is poped(removed from top of the stack\n", (*stack)->array[(*stack)->top]);
+        printf("Deleting an element(%d) in the stack.\n", (*stack)->array[(*stack)->top]);
         return (*stack)->array[(*stack)->top--];
     }
     return 0;
@@ -82,10 +83,8 @@ int main()
     push(&stack, 21);
     push(&stack, 34);
     push(&stack, 31);
-    printf("Elements in the stack from top to buttom\n");
     display(&stack);
     pop(&stack);
-    printf("Elements in the stack from top to buttom\n");
     display(&stack);
     peek(stack);
     printf("There are %d elements in the stack.\n", height(stack));
